@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_04_123012) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_04_125449) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -29,6 +29,26 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_04_123012) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["restaurant_id"], name: "index_menus_on_restaurant_id"
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer "quantity"
+    t.decimal "price", precision: 10, scale: 2
+    t.bigint "order_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "status", default: 0
+    t.decimal "total_price", precision: 10, scale: 2
+    t.bigint "visitor_id", null: false
+    t.bigint "restaurant_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["restaurant_id"], name: "index_orders_on_restaurant_id"
+    t.index ["visitor_id"], name: "index_orders_on_visitor_id"
   end
 
   create_table "restaurants", force: :cascade do |t|
@@ -54,5 +74,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_04_123012) do
 
   add_foreign_key "menu_items", "menus"
   add_foreign_key "menus", "restaurants"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "restaurants"
+  add_foreign_key "orders", "users", column: "visitor_id"
   add_foreign_key "restaurants", "users", column: "owner_id"
 end
