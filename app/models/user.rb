@@ -4,4 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   enum role: { visitor: 0, owner: 1 }
+
+  has_many :restaurants, foreign_key: :owner_id
+  has_many :orders, foreign_key: :visitor_id
 end
