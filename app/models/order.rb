@@ -2,7 +2,7 @@ class Order < ApplicationRecord
   enum status: {
     pending: 0,
     confirmed: 1,
-    in_progress: 2
+    in_progress: 2,
     completed: 3,
     cancelled: 4
   }

@@ -8,11 +8,8 @@
   <% @menu_items.each do |item| %>
     <li>
       <strong><%= item.name %></strong>: <%= number_to_currency(item.price) %> 
-      <% if item.available? %>
-        (Available)
-      <% else %>
-        (Out of Stock)
-      <% end %>
+      <%= item.available? ? "(Available)" : "(Out of Stock)" %>
+      <%= link_to "Add to Order", "#", class: "btn" %>
     </li>
   <% end %>
 </ul>
