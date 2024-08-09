@@ -1,4 +1,19 @@
 <div>
   <h1 class="font-bold text-4xl">Restaurants#show</h1>
   <p>Find me in app/views/restaurants/show.html.erb</p>
+
+  <h1>Menu for <%= @menu.restaurant.name %></h1>
+
+<ul>
+  <% @menu_items.each do |item| %>
+    <li>
+      <strong><%= item.name %></strong>: <%= number_to_currency(item.price) %> 
+      <% if item.available? %>
+        (Available)
+      <% else %>
+        (Out of Stock)
+      <% end %>
+    </li>
+  <% end %>
+</ul>
 </div>
