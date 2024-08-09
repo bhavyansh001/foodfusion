@@ -1,4 +1,5 @@
 class RestaurantsController < ApplicationController
+  include RestaurantConcern
   def index
   end
 
@@ -9,7 +10,7 @@ class RestaurantsController < ApplicationController
   end
 
   def show
-    @menu = Restaurant.find(params[:id]).menu
+    @menu = @restaurant.menu
     @menu_items = @menu.menu_items
   end
 
