@@ -1,5 +1,6 @@
 <h1><%= @restaurant.name %> Dashboard</h1>
 
+
 <section>
   <h2>Active Orders</h2>
   <% @active_orders.each do |order| %>
@@ -13,4 +14,17 @@
 <section>
   <h2>Analytics</h2>
   <p>Daily Orders: <%= @daily_orders %></p>
+</section>
+
+<section>
+  <h2>Menu</h2>
+  <% @menu_items.each do |menu_item| %>
+    <div>
+      <h3><%= menu_item.name %></h3>
+      <p>Price: <%= number_to_currency(menu_item.price) %></p>
+      <%= link_to "Edit", edit_dashboard_menu_item_path(@restaurant, menu_item) %>
+      <%= link_to "Delete", dashboard_menu_item_path(@restaurant, menu_item), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+    </div>
+  <% end %>
+  <%= link_to "Add New Menu Item", new_dashboard_menu_item_path(@restaurant, @menu_item) %>
 </section>

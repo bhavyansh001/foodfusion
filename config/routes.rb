@@ -3,10 +3,12 @@ Rails.application.routes.draw do
   devise_for :users
   resources :restaurants do
     post '/add_order', to: 'orders#add_order'
-    resources :menu_items
   end
   resources :orders, only: [:show]
   get 'owner_dashboard/index'
-  get 'restaurant/:id', to: 'owner_dashboard#show', as: 'dashboard'
+  scope 'restaurant/:restaurant_id', as: 'dashboard' do
+    get '/', to: 'owner_dashboard#show'
+    resources :menu_items
+  end
   get "up" => "rails/health#show", as: :rails_health_check
 end

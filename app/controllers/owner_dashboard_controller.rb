@@ -12,7 +12,7 @@ class OwnerDashboardController < ApplicationController
   private
 
   def set_restaurant
-    @restaurant = current_user.restaurants.find(params[:id])
+    @restaurant = current_user.restaurants.find(params[:restaurant_id])
     @menu_items = @restaurant.menu_items
   end
 
