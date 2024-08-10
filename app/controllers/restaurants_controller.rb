@@ -10,8 +10,7 @@ class RestaurantsController < ApplicationController
   end
 
   def show
-    @menu = @restaurant.menu
-    @menu_items = @menu.menu_items
+    @menu_items = @restaurant.menu_items
   end
 
   def edit

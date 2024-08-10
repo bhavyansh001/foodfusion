@@ -8,6 +8,6 @@ module RestaurantConcern
   private
 
   def set_restaurant
-    @restaurant = Restaurant.find(params[:id])
+    @restaurant = Restaurant.find(params[:restaurant_id] || params[:id])
   end
 end
