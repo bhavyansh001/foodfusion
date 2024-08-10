@@ -11,7 +11,8 @@ class MenuItemsController < ApplicationController
     @menu_item = @restaurant.menu_items.new(menu_item_params)
     @menu_item.menu_id = @restaurant.menu.id
     if @menu_item.save
-      redirect_to dashboard_path(@restaurant), notice: 'Menu item was successfully created.'
+      redirect_to dashboard_path(@restaurant),
+        notice: 'Menu item was successfully created.'
     else
       render :new
     end
@@ -21,7 +22,8 @@ class MenuItemsController < ApplicationController
 
   def update
     if @menu_item.update(menu_item_params)
-      redirect_to dashboard_path(@restaurant), notice: 'Menu item was successfully updated.'
+      redirect_to dashboard_path(@restaurant),
+        notice: 'Menu item was successfully updated.'
     else
       render :edit
     end
@@ -29,7 +31,8 @@ class MenuItemsController < ApplicationController
 
   def destroy
     @menu_item.destroy
-    redirect_to dashboard_path(@restaurant), notice: 'Menu item was successfully deleted.'
+    redirect_to dashboard_path(@restaurant),
+      notice: 'Menu item was successfully deleted.'
   end
 
   private
@@ -47,6 +50,7 @@ class MenuItemsController < ApplicationController
   end
 
   def ensure_owner
-    redirect_to root_path, alert: 'Access denied.' unless current_user.owner?
+    redirect_to root_path,
+      alert: 'Access denied.' unless current_user.owner?
   end
 end
