@@ -28,3 +28,6 @@
   <% end %>
   <%= link_to "Add New Menu Item", new_dashboard_menu_item_path(@restaurant, @menu_item) %>
 </section>
+
+<%= link_to "Edit Restaurant", edit_restaurant_path(@restaurant) %>
+<%= link_to "Delete Restaurant", restaurant_path(@restaurant), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
