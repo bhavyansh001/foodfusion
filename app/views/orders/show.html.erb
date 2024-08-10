@@ -1,0 +1,20 @@
+<h1>Order Details</h1>
+
+<h2>Restaurant: <%= @order.restaurant.name %></h2>
+
+<h3>Total Price: <%= number_to_currency(@order.total_price) %></h3>
+
+<h3>Ordered Items:</h3>
+<ul>
+  <% @order.order_items.each do |order_item| %>
+    <li>
+      <strong><%= order_item.menu_item.name %></strong>
+      <br>
+      Quantity: <%= order_item.quantity %>
+      <br>
+      Price: <%= number_to_currency(order_item.price) %>
+      <br>
+      Subtotal: <%= number_to_currency(order_item.quantity * order_item.price) %>
+    </li>
+  <% end %>
+</ul>
