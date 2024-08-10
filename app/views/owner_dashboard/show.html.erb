@@ -1,0 +1,16 @@
+<h1><%= @restaurant.name %> Dashboard</h1>
+
+<section>
+  <h2>Active Orders</h2>
+  <% @active_orders.each do |order| %>
+    <div>
+      <p>Order #<%= order.id %></p>
+      <p>Status: <%= order.status %></p>
+    </div>
+  <% end %>
+</section>
+
+<section>
+  <h2>Analytics</h2>
+  <p>Daily Orders: <%= @daily_orders %></p>
+</section>

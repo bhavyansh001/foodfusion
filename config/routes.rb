@@ -6,5 +6,7 @@ Rails.application.routes.draw do
     resources :menu_items
   end
   resources :orders, only: [:show]
+  get 'owner_dashboard/index'
+  get 'restaurant/:id', to: 'owner_dashboard#show', as: 'dashboard'
   get "up" => "rails/health#show", as: :rails_health_check
 end
