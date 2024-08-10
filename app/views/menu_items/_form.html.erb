@@ -1,0 +1,31 @@
+<%= form_with(url: @menu_item.new_record? ? dashboard_menu_items_path(@restaurant) : dashboard_menu_item_path(@restaurant, @menu_item), model: @menu_item, local: true) do |form| %>
+  <% if menu_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(menu_item.errors.count, "error") %> prohibited this menu item from being saved:</h2>
+      <ul>
+        <% menu_item.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.number_field :price, step: 0.01 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :availability %>
+    <%= form.select :availability, MenuItem.availabilities.keys.map { |availability| [availability.titleize, availability] }, {}, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
