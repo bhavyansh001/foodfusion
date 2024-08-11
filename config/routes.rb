@@ -10,5 +10,6 @@ Rails.application.routes.draw do
     get '/', to: 'owner_dashboard#show'
     resources :menu_items
   end
+  get 'dashboard', to: 'visitor_dashboard#show', as: :visitor_dashboard
   get "up" => "rails/health#show", as: :rails_health_check
 end

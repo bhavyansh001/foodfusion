@@ -9,7 +9,11 @@
   <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn" %>
 
 <% if user_signed_in? && current_user.owner? %>
-  <%= link_to "Manage your Restaurant", owner_dashboard_index_path, class: "btn btn-primary" %>
+  <%= link_to "Manage your Restaurant", owner_dashboard_index_path, class: "btn" %>
+<% end %>
+
+<% if user_signed_in? %>
+  <%= link_to "Your Profile", visitor_dashboard_path, class: "btn" %>
 <% end %>
 
 <br><br>
