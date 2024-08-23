@@ -4,6 +4,15 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
+  def update_status
+    @order = Order.find(params[:id])
+    if @order.update(status: params[:status])
+      redirect_to @order, notice: 'Order status updated successfully.'
+    else
+      redirect_to @order, alert: 'Failed to update order status.'
+    end
+  end
+
   def add_order
     @restaurant = find_restaurant
     @order = build_order
