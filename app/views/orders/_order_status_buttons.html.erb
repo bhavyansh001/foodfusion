@@ -1,11 +1,20 @@
 <div class="mt-6">
   <h3 class="text-xl font-medium mb-4">Update Order Status</h3>
   <div class="space-x-2">
-    <% Order.statuses.keys.each do |status| %>
-      <%= button_to status.capitalize, 
-                    update_status_order_path(@order, status: status),
+    <% if current_user.owner? %>
+      <% Order.statuses.keys.each do |status| %>
+        <%= button_to status.capitalize, 
+                      update_status_order_path(@order, status: status),
+                      method: :patch,
+                      class: "btn" %>
+      <% end %>
+    <% else %>
+     <%= button_to 'Cancel Order', 
+                    update_status_order_path(@order, status: 'cancelled'),
                     method: :patch,
-                    class: "px-4 py-2 rounded-md text-white bg-blue-500 hover:bg-blue-600" %>
+                    data: { confirm: 'Are you sure you want to cancel this order?' },
+                    class: "btn hover:bg-red-600" %>
+    
     <% end %>
   </div>
 </div>

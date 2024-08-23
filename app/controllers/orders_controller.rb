@@ -7,9 +7,9 @@ class OrdersController < ApplicationController
   def update_status
     @order = Order.find(params[:id])
     if @order.update(status: params[:status])
-      redirect_to @order, notice: 'Order status updated successfully.'
+      head :ok
     else
-      redirect_to @order, alert: 'Failed to update order status.'
+      render json: { error: 'Failed to update order status.' }, status: :unprocessable_entity
     end
   end
 
