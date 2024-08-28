@@ -67,3 +67,5 @@ end
 gem "devise", "~> 4.9"
 
 gem "groupdate", "~> 6.4"
+
+gem "solid_queue", "~> 0.6.0"
