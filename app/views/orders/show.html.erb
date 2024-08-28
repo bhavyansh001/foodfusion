@@ -1,20 +1,29 @@
-<h1>Order Details</h1>
+<%= turbo_stream_from [@order.restaurant, "orders"] %>
 
-<h2>Restaurant: <%= @order.restaurant.name %></h2>
+<div id="<%= dom_id(@order) %>" class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6">Order Details</h1>
 
-<h3>Total Price: <%= number_to_currency(@order.total_price) %></h3>
+  <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+    <h2 class="text-2xl font-semibold mb-4">Restaurant: <%= @order.restaurant.name %></h2>
+    <h3 class="text-xl font-medium mb-4">Total Price: <%= number_to_currency(@order.total_price) %></h3>
+    
+    <%= render 'status', order: @order %>
 
-<h3>Ordered Items:</h3>
-<ul>
-  <% @order.order_items.each do |order_item| %>
-    <li>
-      <strong><%= order_item.menu_item.name %></strong>
-      <br>
-      Quantity: <%= order_item.quantity %>
-      <br>
-      Price: <%= number_to_currency(order_item.price) %>
-      <br>
-      Subtotal: <%= number_to_currency(order_item.quantity * order_item.price) %>
-    </li>
-  <% end %>
-</ul>
+    <h3 class="text-xl font-medium mb-4">Ordered Items:</h3>
+    <ul class="space-y-4">
+      <% @order.order_items.each do |order_item| %>
+        <li class="border-b pb-4">
+          <strong class="text-lg"><%= order_item.menu_item.name %></strong>
+          <br>
+          Quantity: <%= order_item.quantity %>
+          <br>
+          Price: <%= number_to_currency(order_item.price) %>
+          <br>
+          Subtotal: <%= number_to_currency(order_item.quantity * order_item.price) %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <%= render 'order_status_buttons', order: @order %>
+</div>

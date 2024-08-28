@@ -4,6 +4,15 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
   end
 
+  def update_status
+    @order = Order.find(params[:id])
+    if @order.update(status: params[:status])
+      head :ok
+    else
+      render json: { error: 'Failed to update order status.' }, status: :unprocessable_entity
+    end
+  end
+
   def add_order
     @restaurant = find_restaurant
     @order = build_order

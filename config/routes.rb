@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   resources :restaurants do
     post '/add_order', to: 'orders#add_order'
   end
-  resources :orders, only: [:show]
+  resources :orders, only: [:show] do
+    member do
+      patch :update_status
+    end
+  end
   get 'owner_dashboard/index'
   scope 'restaurant/:restaurant_id', as: 'dashboard' do
     get '/', to: 'owner_dashboard#show'
