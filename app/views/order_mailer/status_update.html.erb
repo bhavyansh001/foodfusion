@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Status Update</title>
+</head>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333333; max-width: 600px; margin: 0 auto; padding: 20px;">
+    <div style="background-color: #f8f8f8; border-radius: 10px; padding: 20px; margin-bottom: 20px;">
+        <h1 style="color: #4a5568; text-align: center; margin-bottom: 20px;">Order Status Update</h1>
+        
+        <p style="font-size: 16px;">Dear <%= @order.visitor.email %>,</p>
+        
+        <p style="font-size: 16px; margin-bottom: 20px;">Your order #<strong><%= @order.id %></strong> has been updated to:</p>
+        
+        <div style="background-color: #ebf8ff; border-left: 4px solid #4299e1; padding: 10px; margin-bottom: 20px;">
+            <p style="font-size: 18px; font-weight: bold; color: #2b6cb0; margin: 0;"><%= @order.status.titleize %></p>
+        </div>
+        
+        <% if @order.status == 'confirmed' %>
+            <p style="font-size: 16px;">We've received your order and it's been confirmed. We'll start preparing it soon!</p>
+        <% elsif @order.status == 'in_progress' %>
+            <p style="font-size: 16px;">Great news! We're currently preparing your order. It won't be long now!</p>
+        <% elsif @order.status == 'completed' %>
+            <p style="font-size: 16px;">Your order is ready! It's on its way.</p>
+        <% elsif @order.status == 'cancelled' %>
+            <p style="font-size: 16px;">We're sorry, but your order has been cancelled. If you didn't request this, please contact us.</p>
+        <% end %>
+        
+        <p style="font-size: 16px; margin-top: 20px;">Thank you for your business!</p>
+    </div>
+    
+    <div style="text-align: center; font-size: 14px; color: #718096;">
+        <p>If you have any questions, please don't hesitate to contact us.</p>
+        <p>&copy; <%= Time.now.year %> <%= @order.restaurant.name %>. All rights reserved.</p>
+    </div>
+</body>
+</html>
