@@ -14,6 +14,8 @@ class Order < ApplicationRecord
 
   broadcasts_to ->(order) { [order.restaurant, "orders"] }
   after_update_commit :broadcast_status_update
+  after_update :send_status_update_email, if: :saved_change_to_status?
+
   private
 
   def broadcast_status_update
@@ -21,5 +23,9 @@ class Order < ApplicationRecord
                          target: "order_#{id}_status",
                          partial: "orders/status",
                          locals: { order: self }
+  end
+
+  def send_status_update_email
+    OrderStatusUpdateMailerJob.perform_later(id)
   end
 end

@@ -56,6 +56,8 @@ Rails.application.configure do
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
 
+  config.active_job.queue_adapter = :solid_queue
+
   # Highlight code that enqueued background job in logs.
   config.active_job.verbose_enqueue_logs = true
 
@@ -73,5 +75,20 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  # Action Mailer configuration
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:        'smtp.hostinger.com',
+    port:           587,
+    domain:         '127.0.0.1:3000',
+    user_name:      'hi@foodfusion.diversepixel.com',
+    password:       Rails.application.credentials.dig(:email_setup, :password),
+    authentication: 'plain',
+    enable_starttls_auto: true,
+    open_timeout:   5,
+    read_timeout:   5
+  }
+  config.action_mailer.default_url_options = { host: '127.0.0.1', port: 3000 }
+  config.action_mailer.default_options = { from: 'hi@foodfusion.diversepixel.com' }
 end
