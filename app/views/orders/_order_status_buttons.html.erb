@@ -1,5 +1,5 @@
 <div class="mt-6">
-  <h3 class="text-xl font-medium mb-4">Update Order Status</h3>
+  <h3 class="text-xl font-medium mb-4"><%= t('order.update_status') %></h3>
   <div class="space-x-2">
     <% if current_user.owner? %>
       <% Order.statuses.keys.each do |status| %>
@@ -9,12 +9,11 @@
                       class: "btn" %>
       <% end %>
     <% else %>
-     <%= button_to 'Cancel Order', 
+      <%= button_to t('order.cancel_order'), 
                     update_status_order_path(@order, status: 'cancelled'),
                     method: :patch,
-                    data: { confirm: 'Are you sure you want to cancel this order?' },
+                    data: { confirm: t('order.confirm_cancel') },
                     class: "btn hover:bg-red-600" %>
-    
     <% end %>
   </div>
 </div>
