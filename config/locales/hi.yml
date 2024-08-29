@@ -1,0 +1,10 @@
+hi:
+  home:
+    title: "होम#index"
+    search_placeholder: "रेस्टोरेंट खोजें..."
+    log_in: "लॉग इन करें"
+    sign_up: "साइन अप करें"
+    sign_out: "लॉग आउट"
+    manage_restaurant: "अपना रेस्टोरेंट प्रबंधित करें"
+    your_profile: "आपकी प्रोफाइल"
+    show: "दिखाएँ"
