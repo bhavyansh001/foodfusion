@@ -35,8 +35,13 @@ module Foodfusion
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    
+    # Rack Attack
+    config.middleware.use Rack::Attack
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    config.i18n.available_locales = [:en, :hi]
+    config.i18n.default_locale = :en
   end
 end

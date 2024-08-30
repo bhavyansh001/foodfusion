@@ -4,8 +4,6 @@ class OwnerDashboardController < ApplicationController
   before_action :set_restaurant, only: [:show]
   before_action :set_orders, only: [:show]
 
-  include OwnerDashboardHelper
-
   def index
     @restaurants = current_user.restaurants
   end
@@ -32,14 +30,14 @@ class OwnerDashboardController < ApplicationController
   end
 
   def set_revenue_analytics
-    @total_revenue = total_revenue(@restaurant)
-    @average_order_value = average_order_value(@restaurant)
-    @revenue_by_day = revenue_by_day(@restaurant)
+    @total_revenue = @restaurant.total_revenue
+    @average_order_value = @restaurant.average_order_value
+    @revenue_by_day = @restaurant.revenue_by_day
   end
 
   def set_popular_items
-    @top_items = top_items(@restaurant)
-    @highest_revenue_items = highest_revenue_items(@restaurant)
+    @top_items = @restaurant.top_items
+    @highest_revenue_items = @restaurant.highest_revenue_items
   end
 
   def set_order_status_distribution
@@ -47,8 +45,8 @@ class OwnerDashboardController < ApplicationController
   end
 
   def set_customer_analytics
-    @total_customers = total_customers(@restaurant)
-    @returning_customers = returning_customers(@restaurant)
+    @total_customers = @restaurant.total_customers
+    @returning_customers = @restaurant.returning_customers
   end
 
   def set_peak_hours
