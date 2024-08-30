@@ -17,11 +17,16 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'visitor_dashboard#show', as: :visitor_dashboard
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # API
   namespace :api do
     namespace :v1 do
       post 'login', to: 'sessions#create'
-      resources :restaurants, only: [:index]
+      post 'register', to: 'registrations#create'
+      resources :restaurants, only: [:index, :show] do
+        resources :menu_items, only: [:index]
+        post '/add_order', to: 'orders#create'
+      end
+      resources :orders, only: [:index, :show, :create]
+      get 'dashboard', to: 'dashboard#show'
     end
   end
 end
