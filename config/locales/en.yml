@@ -1,6 +1,7 @@
 en:
   home:
-    title: "Home#index"
+    home: "Home"
+    welcome: "Welcome"
     search_placeholder: "Search restaurants..."
     log_in: "Log In"
     sign_up: "Sign Up"
@@ -8,6 +9,7 @@ en:
     manage_restaurant: "Manage your Restaurant"
     your_profile: "Your Profile"
     show: "Show"
+    footer: "FoodFusion. All rights reserved."
 
   email:
     order_status:
