@@ -8,31 +8,42 @@ class MenuItemsController < ApplicationController
   end
 
   def create
+    @restaurant.menu ||= @restaurant.create_menu
     @menu_item = @restaurant.menu_items.new(menu_item_params)
     @menu_item.menu_id = @restaurant.menu.id
+    respond_to do |format|
     if @menu_item.save
-      redirect_to dashboard_path(@restaurant),
-        notice: 'Menu item was successfully created.'
+      format.turbo_stream
+      format.html { redirect_to dashboard_path(@restaurant),
+       notice: 'Menu item was successfully created.' }
     else
-      render :new
+      format.html { render :new, status: :unprocessable_entity }
     end
+  end
   end
 
   def edit;  end
 
   def update
-    if @menu_item.update(menu_item_params)
-      redirect_to dashboard_path(@restaurant),
-        notice: 'Menu item was successfully updated.'
-    else
-      render :edit
+    respond_to do |format|
+      if @menu_item.update(menu_item_params)
+        format.turbo_stream
+        format.html { redirect_to dashboard_path(@restaurant),
+         notice: 'Menu item was successfully updated.' }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+      end
     end
   end
 
   def destroy
     @menu_item.destroy
-    redirect_to dashboard_path(@restaurant),
-      notice: 'Menu item was successfully deleted.'
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to dashboard_path(@restaurant),
+       notice: 'Menu item was successfully destroyed.' }
+    end
   end
 
   private
