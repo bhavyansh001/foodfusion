@@ -1,0 +1,13 @@
+<%= turbo_frame_tag "menu_item_#{menu_item.id}" do %>
+    <div class="border border-gray-200 rounded-lg p-4">
+    <h4 class="text-md font-medium text-gray-800 mb-2"><%= menu_item.name %></h4>
+    <p class="text-gray-600">Price: <%= number_to_currency(menu_item.price) %></p>
+    <p class="text-gray-600">Availability: <%= menu_item.availability.capitalize %></p>
+    <div class="mt-2 space-x-2">
+        <%= turbo_frame_tag "edit_menu_item" do %>
+        <%= link_to "Edit", edit_dashboard_menu_item_path(@restaurant, menu_item), class: "btn text-sm" %>
+        <% end %>
+        <%= link_to "Delete", dashboard_menu_item_path(@restaurant, menu_item), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn text-sm bg-red-500 hover:bg-red-600 text-white" %>
+    </div>
+    </div>
+<% end %>

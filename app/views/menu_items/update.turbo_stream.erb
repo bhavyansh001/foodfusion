@@ -1,0 +1,7 @@
+<%= turbo_stream.replace "menu_item_#{@menu_item.id}" do %>
+  <%= render partial: "menu_items/menu_item", locals: { menu_item: @menu_item } %>
+<% end %>
+
+<%= turbo_stream.replace "menu_item_#{@menu_item.id}_form" do %>
+  <%= render partial: "menu_items/form", locals: { menu_item: @menu_item, restaurant: @restaurant } %>
+<% end %>
