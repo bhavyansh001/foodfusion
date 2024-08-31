@@ -1,17 +1,32 @@
-<h1><%= @restaurant.name %> Menu</h1>
+<div class="max-w-4xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold text-gray-800 mb-6"><%= @restaurant.name %> Menu</h1>
 
-<%= form_tag restaurant_add_order_path(@restaurant), method: :post do %>
-  <ul>
-    <% @menu_items.each do |item| %>
-      <li>
-        <%= check_box_tag "menu_item_ids[]", item.id, false, id: "menu_item_#{item.id}" %>
-        <%= label_tag "menu_item_#{item.id}" do %>
-          <strong><%= item.name %></strong>: <%= number_to_currency(item.price) %>
-          <%= item.available? ? "(Available)" : "(Out of Stock)" %>
-        <% end %>
-        <%= number_field_tag "quantities[#{item.id}]", 1, min: 1, max: 10, class: 'quantity-input' %>
-      </li>
-    <% end %>
-  </ul>
-  <%= submit_tag "Add Selected Items to Order" %>
-<% end %>
+  <%= form_tag restaurant_add_order_path(@restaurant), method: :post, class: "space-y-6" do %>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <% @menu_items.each do |item| %>
+        <div class="bg-white rounded-lg shadow-md p-4 flex flex-col">
+          <div class="flex items-start justify-between mb-2">
+            <div class="flex-grow">
+              <h3 class="text-lg font-semibold text-gray-800"><%= item.name %></h3>
+              <p class="text-gray-600"><%= number_to_currency(item.price) %></p>
+            </div>
+            <span class="<%= item.available? ? 'text-green-500' : 'text-red-500' %> text-sm font-medium">
+              <%= item.available? ? "Available" : "Out of Stock" %>
+            </span>
+          </div>
+          <div class="mt-auto flex items-center justify-between">
+            <div class="flex items-center">
+              <%= check_box_tag "menu_item_ids[]", item.id, false, id: "menu_item_#{item.id}", class: "h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded", disabled: !item.available? %>
+              <%= label_tag "menu_item_#{item.id}", "Add to Order", class: "ml-2 text-sm text-gray-700" %>
+            </div>
+
+            <%= number_field_tag "quantities[#{item.id}]", 1, min: 1, max: 10, class: 'form-input w-20 text-right', disabled: !item.available? %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="text-right">
+      <%= submit_tag "Add Selected Items to Order", class: "btn bg-blue-500 text-white hover:bg-blue-600" %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,11 @@
+<footer class="bg-gray-800 text-white py-4 mt-auto">
+  <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
+    <div>
+      © <%= Time.current.year %> <%= t('home.footer') %>
+    </div>
+    <div>
+      <%= link_to "English", locale: :en %>
+      <%= link_to "हिंदी", locale: :hi %>
+    </div>
+  </div>
+</footer>
