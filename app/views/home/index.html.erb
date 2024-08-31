@@ -1,32 +1,21 @@
-<div>
-  <h1 class="font-bold text-4xl"><%= t('home.title') %></h1>
-  <input type="text" id="restaurantSearch" placeholder="<%= t('home.search_placeholder') %>">
-  <br><br>
+  <!-- Main Content -->
+  <main class="max-w-6xl mx-auto mt-6 px-4" data-controller="homepage">
+    <h1 class="text-4xl font-bold text-gray-800 mb-6"><%= t('home.welcome') %></h1>
+    
+    <!-- Search Bar -->
+    <div class="mb-8">
+      <input type="text" id="restaurantSearch" data-action="input->homepage#search" placeholder="<%= t('home.search_placeholder') %>" class="w-full px-4 py-2 rounded-lg shadow-sm border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+    </div>
 
-  <%= link_to t('home.log_in'), new_user_session_path, class: "btn" %>
-
-  <%= link_to t('home.sign_up'), new_user_registration_path, class: "btn" %>
-
-  <%= link_to t('home.sign_out'), destroy_user_session_path, data: { turbo_method: :delete }, class: "btn" %>
-
-  <% if user_signed_in? && current_user.owner? %>
-    <%= link_to t('home.manage_restaurant'), owner_dashboard_index_path, class: "btn" %>
-  <% end %>
-
-  <% if user_signed_in? %>
-    <%= link_to t('home.your_profile'), visitor_dashboard_path, class: "btn" %>
-  <% end %>
-
-  <br><br>
-  <div id="restaurantList">
-    <% @restaurants.each do |restaurant| %>
-      <div class="restaurant-item">
-        <h2><%= restaurant.name %></h2><br>
-        <%= link_to t('home.show'), restaurant_path(restaurant), class: "btn" %><br>
-      </div>
-    <% end %>
-  </div>
-</div>
-
-<%= link_to "English", locale: :en %> |
-<%= link_to "हिंदी", locale: :hi %>
+    <!-- Restaurant List -->
+    <div id="restaurantList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-homepage-target="restaurantList">
+      <% @restaurants.each do |restaurant| %>
+        <div class="restaurant-item"  data-homepage-target="restaurantItem">
+          <div class="p-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-2"><%= restaurant.name %></h2>
+            <%= link_to t('home.show'), restaurant_path(restaurant), class: "btn block text-center mt-4" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </main>
