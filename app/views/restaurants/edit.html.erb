@@ -1,9 +1,11 @@
-<div class="max-w-2xl mx-auto px-4 py-8">
-  <h1 class="text-2xl font-bold text-gray-800 mb-4">Edit Restaurant</h1>
+<%= turbo_frame_tag "edit_restaurant" do %>
+  <div class="max-w-2xl mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold text-gray-800 mb-4">Edit Restaurant</h1>
 
-  <%= render 'form', restaurant: @restaurant %>
+    <%= render 'form', restaurant: @restaurant %>
 
-  <div class="mt-4">
-    <%= link_to 'Back', owner_dashboard_index_path, class: "btn bg-gray-500 hover:bg-gray-600 text-white" %>
+    <div class="mt-4">
+      <%= link_to 'Back', owner_dashboard_index_path, class: "btn bg-gray-500 hover:bg-gray-600 text-white" %>
+    </div>
   </div>
-</div>
+<% end %>

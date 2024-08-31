@@ -49,27 +49,22 @@
         <p class="text-gray-600">Out of Stock: <%= @menu_item_availability['out_of_stock'] || 0 %></p>
       </div>
       <h3 class="text-lg font-medium text-gray-800 mb-2">All Menu Items</h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <% @menu_items.each do |menu_item| %>
-          <div class="border border-gray-200 rounded-lg p-4">
-            <h4 class="text-md font-medium text-gray-800 mb-2"><%= menu_item.name %></h4>
-            <p class="text-gray-600">Price: <%= number_to_currency(menu_item.price) %></p>
-            <p class="text-gray-600">Availability: <%= menu_item.availability.capitalize %></p>
-            <div class="mt-2 space-x-2">
-              <%= link_to "Edit", edit_dashboard_menu_item_path(@restaurant, menu_item), class: "btn text-sm" %>
-              <%= link_to "Delete", dashboard_menu_item_path(@restaurant, menu_item), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn text-sm bg-red-500 hover:bg-red-600 text-white" %>
-            </div>
-          </div>
-        <% end %>
-      </div>
-      <div class="mt-4">
-        <%= link_to "Add New Menu Item", new_dashboard_menu_item_path(@restaurant, @menu_item), class: "btn bg-green-500 hover:bg-green-600 text-white" %>
-      </div>
+      
+        <div id="menu_items" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <%= render @menu_items %>
+        </div>
+      <%= turbo_frame_tag "new_menu_item" do %>
+        <div class="mt-4">
+          <%= link_to "Add New Menu Item", new_dashboard_menu_item_path(@restaurant), class: "btn bg-green-500 hover:bg-green-600 text-white" %>
+        </div>
+      <% end %>
     </section>
   </div>
 
   <div class="mt-8 space-x-4">
-    <%= link_to "Edit Restaurant", edit_restaurant_path(@restaurant), class: "btn" %>
+    <%= turbo_frame_tag "edit_restaurant" do %>
+      <%= link_to "Edit Restaurant", edit_restaurant_path(@restaurant), class: "btn" %>
+    <% end %>
     <%= link_to "Delete Restaurant", restaurant_path(@restaurant), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn bg-red-500 hover:bg-red-600 text-white" %>
   </div>
 </div>
