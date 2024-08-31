@@ -1,0 +1,9 @@
+<h2 style="color: #007bff;">Welcome to FoodFusion!</h2>
+
+<p>Hello <%= @email %>!</p>
+
+<p>You can confirm your account email through the link below:</p>
+
+<p style="margin-top: 20px;">
+  <%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token), style: "display: inline-block; padding: 10px 20px; background-color: #007bff; color: #ffffff; text-decoration: none; border-radius: 5px;" %>
+</p>
