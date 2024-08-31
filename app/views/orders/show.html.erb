@@ -1,29 +1,38 @@
 <%= turbo_stream_from [@order.restaurant, "orders"] %>
 
-<div id="<%= dom_id(@order) %>" class="container mx-auto px-4 py-8">
-  <h1 class="text-3xl font-bold mb-6"><%= t('order.details') %></h1>
+<div id="<%= dom_id(@order) %>" class="max-w-4xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold text-gray-800 mb-6"><%= t('order.details') %></h1>
 
-  <div class="bg-white shadow-md rounded-lg p-6 mb-6">
-    <h2 class="text-2xl font-semibold mb-4"><%= t('order.restaurant') %> <%= @order.restaurant.name %></h2>
-    <h3 class="text-xl font-medium mb-4"><%= t('order.total_price') %> <%= number_to_currency(@order.total_price) %></h3>
-    
-    <%= render 'status', order: @order %>
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+    <div class="p-6 border-b border-gray-200">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-2"><%= t('order.restaurant') %> <%= @order.restaurant.name %></h2>
+      <p class="text-xl font-medium text-gray-700"><%= t('order.total_price') %> <%= number_to_currency(@order.total_price) %></p>
+    </div>
 
-    <h3 class="text-xl font-medium mb-4"><%= t('order.ordered_items') %></h3>
-    <ul class="space-y-4">
-      <% @order.order_items.each do |order_item| %>
-        <li class="border-b pb-4">
-          <strong class="text-lg"><%= order_item.menu_item.name %></strong>
-          <br>
-          <%= t('order.quantity') %>: <%= order_item.quantity %>
-          <br>
-          <%= t('order.price') %>: <%= number_to_currency(order_item.price) %>
-          <br>
-          <%= t('order.subtotal') %>: <%= number_to_currency(order_item.quantity * order_item.price) %>
-        </li>
-      <% end %>
-    </ul>
+    <div class="p-6 bg-gray-50">
+      <%= render 'status', order: @order %>
+    </div>
+
+    <div class="p-6">
+      <h3 class="text-xl font-semibold text-gray-800 mb-4"><%= t('order.ordered_items') %></h3>
+      <ul class="space-y-4">
+        <% @order.order_items.each do |order_item| %>
+          <li class="flex justify-between items-center border-b border-gray-200 pb-4">
+            <div>
+              <h4 class="text-lg font-medium text-gray-800"><%= order_item.menu_item.name %></h4>
+              <p class="text-gray-600"><%= t('order.quantity') %>: <%= order_item.quantity %></p>
+              <p class="text-gray-600"><%= t('order.price') %>: <%= number_to_currency(order_item.price) %></p>
+            </div>
+            <p class="text-lg font-semibold text-gray-800">
+              <%= t('order.subtotal') %>: <%= number_to_currency(order_item.quantity * order_item.price) %>
+            </p>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
 
-  <%= render 'order_status_buttons', order: @order %>
+  <div class="mt-6">
+    <%= render 'order_status_buttons', order: @order %>
+  </div>
 </div>
