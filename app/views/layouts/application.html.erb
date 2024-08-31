@@ -11,13 +11,12 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <% if notice || alert %>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-    <% end %>
-    <main class="container mx-auto mt-28 px-5 flex">
+  <body class="flex flex-col min-h-screen">
+    <%= render 'shared/navbar' %>
+    <%= render 'shared/flash' %>
+    <main class="container mx-auto px-5 flex-grow">
       <%= yield %>
     </main>
+    <%= render 'shared/footer' %>
   </body>
 </html>

@@ -1,6 +1,7 @@
 hi:
   home:
-    title: "होम#index"
+    home: "होम"
+    welcome: "अभिनंदन"
     search_placeholder: "रेस्टोरेंट खोजें..."
     log_in: "लॉग इन करें"
     sign_up: "साइन अप करें"
@@ -8,6 +9,7 @@ hi:
     manage_restaurant: "अपना रेस्टोरेंट प्रबंधित करें"
     your_profile: "आपकी प्रोफाइल"
     show: "दिखाएँ"
+    footer: "फ़ूडफ़्यूज़न। सभी अधिकार सुरक्षित।"
 
   email:
     order_status:
