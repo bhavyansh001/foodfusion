@@ -73,6 +73,9 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
   config.include Devise::Test::IntegrationHelpers, type: :feature
+
+  # Test Background jobs
+  ActiveJob::Base.queue_adapter = :test
 end
 
 Shoulda::Matchers.configure do |config|
