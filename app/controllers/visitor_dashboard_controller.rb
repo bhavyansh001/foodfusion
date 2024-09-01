@@ -3,9 +3,9 @@ class VisitorDashboardController < ApplicationController
 
   def show
     @active_orders = current_user.orders
-                                 .where(status: ['pending', 'confirmed', 'in_progress'])
+                                 .where(status: %w[pending confirmed in_progress])
     @order_history = current_user.orders
-                                 .where(status: ['completed', 'cancelled'])
+                                 .where(status: %w[completed cancelled])
                                  .order(created_at: :desc).limit(10)
   end
 end
