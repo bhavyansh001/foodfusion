@@ -11,7 +11,12 @@ RSpec.describe User, type: :model do
   end
 
   describe 'callbacks' do
-    #
+    it 'ensures an API token is generated before creation' do
+      user = build(:user)
+      expect(user.api_token).to be_nil
+      user.save
+      expect(user.api_token).not_to be_nil
+    end
   end
 
   describe 'validations' do
