@@ -42,6 +42,9 @@ module Foodfusion
     # Don't generate system test files.
     config.generators.system_tests = nil
     config.i18n.available_locales = %i[en hi]
+
+    # Locales
     config.i18n.default_locale = :en
+    config.action_controller.default_url_options = { locale: I18n.default_locale }
   end
 end
