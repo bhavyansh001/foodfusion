@@ -2,7 +2,7 @@ class MenuItemsController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_owner
   before_action :set_restaurant
-  before_action :set_menu_item, only: [:edit, :update, :destroy]
+  before_action :set_menu_item, only: %i[edit update destroy]
   def new
     @menu_item = @restaurant.menu_items.new
   end
@@ -12,24 +12,28 @@ class MenuItemsController < ApplicationController
     @menu_item = @restaurant.menu_items.new(menu_item_params)
     @menu_item.menu_id = @restaurant.menu.id
     respond_to do |format|
-    if @menu_item.save
-      format.turbo_stream
-      format.html { redirect_to dashboard_path(@restaurant),
-       notice: 'Menu item was successfully created.' }
-    else
-      format.html { render :new, status: :unprocessable_entity }
+      if @menu_item.save
+        format.turbo_stream
+        format.html do
+          redirect_to dashboard_path(@restaurant),
+                      notice: 'Menu item was successfully created.'
+        end
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
-  end
 
-  def edit;  end
+  def edit; end
 
   def update
     respond_to do |format|
       if @menu_item.update(menu_item_params)
         format.turbo_stream
-        format.html { redirect_to dashboard_path(@restaurant),
-         notice: 'Menu item was successfully updated.' }
+        format.html do
+          redirect_to dashboard_path(@restaurant),
+                      notice: 'Menu item was successfully updated.'
+        end
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -41,8 +45,10 @@ class MenuItemsController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream
-      format.html { redirect_to dashboard_path(@restaurant),
-       notice: 'Menu item was successfully destroyed.' }
+      format.html do
+        redirect_to dashboard_path(@restaurant),
+                    notice: 'Menu item was successfully destroyed.'
+      end
     end
   end
 
@@ -61,7 +67,9 @@ class MenuItemsController < ApplicationController
   end
 
   def ensure_owner
+    return if current_user.owner?
+
     redirect_to root_path,
-      alert: 'Access denied.' unless current_user.owner?
+                alert: 'Access denied.'
   end
 end

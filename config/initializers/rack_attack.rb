@@ -11,16 +11,14 @@ class Rack::Attack
 
   # Throttle POST requests to /api/v1/login by IP address
   throttle('logins/ip', limit: 5, period: 5.minutes) do |req|
-    if req.path == '/api/v1/login' && req.post?
-      req.ip
-    end
+    req.ip if req.path == '/api/v1/login' && req.post?
   end
 
   # Throttle POST requests to /api/v1/login by email address
-  throttle("logins/email", limit: 5, period: 5.minutes) do |req|
+  throttle('logins/email', limit: 5, period: 5.minutes) do |req|
     if req.path == '/api/v1/login' && req.post?
       # Use normalized_email as a discriminator
-      req.params['email'].to_s.downcase.gsub(/\s+/, "")
+      req.params['email'].to_s.downcase.gsub(/\s+/, '')
     end
   end
 

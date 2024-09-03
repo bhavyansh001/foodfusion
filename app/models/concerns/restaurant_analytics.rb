@@ -11,8 +11,8 @@ module RestaurantAnalytics
 
   def revenue_by_day
     orders.where(status: 'completed')
-             .group("DATE(created_at)")
-             .sum(:total_price)
+          .group('DATE(created_at)')
+          .sum(:total_price)
   end
 
   def top_items
@@ -37,8 +37,8 @@ module RestaurantAnalytics
 
   def returning_customers
     orders.group(:visitor_id)
-              .having('COUNT(*) > 1')
-              .count
-              .length
+          .having('COUNT(*) > 1')
+          .count
+          .length
   end
 end

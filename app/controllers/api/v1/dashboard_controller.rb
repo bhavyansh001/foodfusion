@@ -29,9 +29,11 @@ module Api
       def visitor_dashboard_data
         {
           active_orders: current_user.orders.where(
-            status: ['pending', 'confirmed', 'in_progress']),
+            status: %w[pending confirmed in_progress]
+          ),
           order_history: current_user.orders.where(
-            status: ['completed', 'cancelled']).order(created_at: :desc).limit(10)
+            status: %w[completed cancelled]
+          ).order(created_at: :desc).limit(10)
         }
       end
 
