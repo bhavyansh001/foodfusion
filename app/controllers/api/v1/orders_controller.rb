@@ -19,7 +19,7 @@ module Api
           render json: @order, status: :created
         else
           render json: { errors: @order.errors.full_messages },
-          status: :unprocessable_entity
+                 status: :unprocessable_entity
         end
       end
 
@@ -37,7 +37,7 @@ module Api
         params[:order_items].each do |item|
           menu_item = MenuItem.find(item[:menu_item_id])
           @order.order_items.new(
-            menu_item: menu_item,
+            menu_item:,
             quantity: item[:quantity].to_i,
             price: menu_item.price
           )

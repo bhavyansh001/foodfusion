@@ -16,8 +16,10 @@ class OrdersController < ApplicationController
   def add_order
     @restaurant = find_restaurant
     @order = build_order
-    return redirect_to @restaurant,
-           alert: 'No menu items selected.' unless order_items_params_present?
+    unless order_items_params_present?
+      return redirect_to @restaurant,
+                         alert: 'No menu items selected.'
+    end
 
     process_order_items
     save_order
