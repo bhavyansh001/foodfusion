@@ -360,10 +360,10 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
-  capistrano (~> 3.11)
-  capistrano-passenger (~> 0.2.0)
-  capistrano-rails (~> 1.4)
-  capistrano-rbenv (~> 2.1, >= 2.1.4)
+  capistrano (~> 3.17)
+  capistrano-passenger (~> 0.2.1)
+  capistrano-rails (~> 1.6)
+  capistrano-rbenv (~> 2.2.0)
   debug
   devise (~> 4.9)
   factory_bot_rails
