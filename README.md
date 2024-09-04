@@ -11,6 +11,7 @@ Welcome to **FoodFusion** v1.0.0! This is the initial release of our innovative 
 5. [Testing](#testing)
 6. [API Rate Limiting and Throttling](#api-rate-limiting-and-throttling)
 7. [Screenshots](#screenshots)
+8. [Mobile experience](#mobile-experience)
 8. [Contributing](#contributing)
 
 ## Key Features
@@ -147,6 +148,11 @@ rails dev:cache
 
 ![POST /add_order](/screenshots/api_post_add_order.png)
 
+## Mobile experience
+
+Our Android app, built with Turbo Native, offers a native app-like experience, allowing you to browse menus, place orders, and track your order status with ease. Download the app now and enjoy the full FoodFusion experience on your mobile device:
+
+[Download foodfusion APK](https://github.com/bhavyansh001/foodfusion/raw/main/android-app/foodfusion.apk)
 
 ## Contributing
 
