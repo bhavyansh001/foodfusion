@@ -8,7 +8,8 @@ module Api
         if user&.valid_password?(params[:password])
           render json: { token: user.api_token, email: user.email }
         else
-          render json: { error: 'Invalid email or password' }, status: :unauthorized
+          render json: { error: 'Invalid email or password' },
+                 status: :unauthorized
         end
       end
     end
