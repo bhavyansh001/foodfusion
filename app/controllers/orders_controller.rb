@@ -9,7 +9,8 @@ class OrdersController < ApplicationController
     if @order.update(status: params[:status])
       head :ok
     else
-      render json: { error: 'Failed to update order status.' }, status: :unprocessable_entity
+      render json: { error: 'Failed to update order status.' },
+             status: :unprocessable_entity
     end
   end
 

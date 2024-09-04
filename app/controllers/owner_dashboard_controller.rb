@@ -25,7 +25,7 @@ class OwnerDashboardController < ApplicationController
   end
 
   def set_orders
-    @active_orders = @restaurant.orders.where(status: %w[pending preparing])
+    @active_orders = @restaurant.orders.where(status: %w[pending in_progress])
     @daily_orders = @restaurant.orders.where('created_at >= ?', 1.day.ago).count
   end
 
