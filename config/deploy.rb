@@ -6,10 +6,12 @@ set :repo_url, "git@github.com:bhavyansh001/foodfusion.git"
 
 set :branch, 'deploy/v1.0.0'
 
-# Deploy to the user's home directory
 set :deploy_to, "/home/deploy/#{fetch :application}"
 
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
+
+# Only keep the last 5 releases to save disk space
+set :keep_releases, 5
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -40,7 +42,7 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bund
 # set :local_user, -> { `git config user.name`.chomp }
 
 # Default value for keep_releases is 5
-set :keep_releases, 5
+# set :keep_releases, 5
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
