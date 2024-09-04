@@ -101,7 +101,7 @@ bin/dev
 ```
 ## Testing
 
-FoodFusion is well-tested using RSpec. The current test suite covers 95.38% of the codebase, ensuring high reliability and robustness.
+FoodFusion is well-tested using RSpec. The current test suite covers 95.05% of the codebase, ensuring high reliability and robustness.
 
 To run the tests, use the following command:
 
@@ -134,6 +134,18 @@ rails dev:cache
 ### Visitor dashboard
 
 ![Visitor Dashboard](/screenshots/visitor_dashboard.png)
+
+----------
+
+### GET /restaurants
+
+![GET /restaurants](/screenshots/api_get_restaurants.png)
+
+----------
+
+### POST /add_order
+
+![POST /add_order](/screenshots/api_post_add_order.png)
 
 
 ## Contributing
