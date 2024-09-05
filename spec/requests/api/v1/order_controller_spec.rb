@@ -36,6 +36,20 @@ RSpec.describe Api::V1::OrdersController, type: :request do
     it 'returns the correct order' do
       expect(JSON.parse(response.body)['id']).to eq(order.id)
     end
+
+    context 'when the order does not belong to the current user' do
+      let(:another_user) { create(:user) }
+      let(:order) { create(:order, visitor: another_user) }
+
+      before do
+        get "/api/v1/orders/#{order.id}", headers: valid_headers
+      end
+
+      it 'returns a forbidden status' do
+        expect(response).to have_http_status(:forbidden)
+        expect(JSON.parse(response.body)['error']).to eq('Access denied')
+      end
+    end
   end
 
   describe 'POST /api/v1/restaurants/:restaurant_id/add_order' do
