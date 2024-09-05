@@ -4,7 +4,8 @@ lock "~> 3.19.1"
 set :application, "foodfusion"
 set :repo_url, "git@github.com:bhavyansh001/foodfusion.git"
 
-set :branch, 'deploy/v1.0.0'
+# set :branch, 'deploy/v1.0.0'
+set :branch, 'release/v1.1.0'
 
 set :deploy_to, "/home/deploy/#{fetch :application}"
 

@@ -102,7 +102,7 @@ bin/dev
 ```
 ## Testing
 
-FoodFusion is well-tested using RSpec. The current test suite covers 95.05% of the codebase, ensuring high reliability and robustness.
+FoodFusion is well-tested using RSpec. The current test suite covers over 93% of the codebase, ensuring high reliability and robustness.
 
 To run the tests, use the following command:
 
