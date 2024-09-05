@@ -3,12 +3,16 @@ module Api
     class OrdersController < BaseController
       def index
         @orders = current_user.orders
-        render json: @orders
+        render json: @orders, status: :ok
       end
 
       def show
-        @order = Order.find(params[:id])
-        render json: @order
+        @order = find_order
+        if @order
+          render json: @order, status: :ok
+        else
+          render json: { error: 'Access denied' }, status: :forbidden
+        end
       end
 
       def create
@@ -24,6 +28,12 @@ module Api
       end
 
       private
+
+      def find_order
+        order = Order.find(params[:id])
+        return unless current_user == order.visitor || current_user == order.restaurant.owner
+          order
+      end
 
       def process_order_items
         return false unless params[:order_items].present?

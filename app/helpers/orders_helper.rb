@@ -13,4 +13,16 @@ module OrdersHelper
       'bg-red-200 text-red-800'
     end
   end
+  def convert_currency(amount)
+    if params[:locale] == 'hi'
+      (amount * 83.98).round(2)
+    else
+      amount
+    end
+  end
+
+  def format_currency(amount)
+    converted_amount = convert_currency(amount)
+    number_to_currency(converted_amount, locale: params[:locale])
+  end
 end

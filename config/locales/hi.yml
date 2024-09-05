@@ -21,18 +21,27 @@ hi:
       completed: "आपका ऑर्डर तैयार है! यह रास्ते में है।"
       cancelled: "हमें खेद है, लेकिन आपका ऑर्डर रद्द कर दिया गया है। यदि आपने यह अनुरोध नहीं किया है, तो कृपया हमसे संपर्क करें।"
       thank_you: "आपके व्यवसाय के लिए धन्यवाद!"
-      footer: "&copy; %{year} %{restaurant_name}. सर्वाधिकार सुरक्षित।"
+      footer: "© %{year} %{restaurant_name}. सर्वाधिकार सुरक्षित।"
       contact_us: "यदि आपके कोई प्रश्न हैं, तो कृपया हमसे संपर्क करने में संकोच न करें।"
 
   order:
     details: "ऑर्डर विवरण"
     restaurant: "रेस्टोरेंट:"
     total_price: "कुल कीमत:"
+    visitor_email: "आगंतुक ईमेल"
     ordered_items: "ऑर्डर किए गए आइटम:"
-    quantity: "मात्रा:"
-    price: "मूल्य:"
-    subtotal: "उप-योग:"
-    status: "स्थिति:"
+    quantity: "मात्रा"
+    price: "मूल्य"
+    subtotal: "उप-योग"
+    status: "स्थिति"
     update_status: "ऑर्डर स्थिति अपडेट करें"
     cancel_order: "ऑर्डर रद्द करें"
     confirm_cancel: "क्या आप वाकई इस ऑर्डर को रद्द करना चाहते हैं?"
+
+  number:
+    currency:
+      format:
+        unit: "₹"
+        format: "%u%n"
+        delimiter: ","
+        separator: "."

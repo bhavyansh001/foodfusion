@@ -29,9 +29,9 @@ RSpec.describe OrdersController, type: :controller do
 
     context 'with invalid params' do
       it 'raises an ArgumentError for invalid status' do
-        expect {
+        expect do
           patch :update_status, params: { id: order.id, status: 'invalid_status' }
-        }.to raise_error(ArgumentError, "'invalid_status' is not a valid status")
+        end.to raise_error(ArgumentError, "'invalid_status' is not a valid status")
       end
     end
   end
@@ -47,9 +47,9 @@ RSpec.describe OrdersController, type: :controller do
 
     context 'with valid params' do
       it 'creates a new order' do
-        expect {
+        expect do
           post :add_order, params: valid_params
-        }.to change(Order, :count).by(1)
+        end.to change(Order, :count).by(1)
       end
 
       it 'redirects to the created order' do
@@ -91,6 +91,46 @@ RSpec.describe OrdersController, type: :controller do
           build(:order_item, quantity: 1, price: 15)
         ]
         expect(controller.send(:calculate_total_price, order_items)).to eq(35)
+      end
+    end
+    describe '#ensure_correct_visitor' do
+      let(:owner) { create(:user) }
+      let(:restaurant) { create(:restaurant, owner:) }
+      let(:order) { create(:order, visitor: user, restaurant:) }
+      let(:another_user) { create(:user) }
+
+      before do
+        sign_in user
+        allow(controller).to receive(:params).and_return({ id: order.id })
+        allow(controller).to receive(:current_user).and_return(current_user)
+      end
+
+      context 'when the current user is the visitor of the order' do
+        let(:current_user) { user }
+
+        it 'allows access' do
+          get :show, params: { id: order.id }
+          expect(response).to have_http_status(:success)
+        end
+      end
+
+      context 'when the current user is the owner of the restaurant associated with the order' do
+        let(:current_user) { owner }
+
+        it 'allows access' do
+          get :show, params: { id: order.id }
+          expect(response).to have_http_status(:success)
+        end
+      end
+
+      context 'when the current user is neither the visitor nor the owner' do
+        let(:current_user) { another_user }
+
+        it 'denies access and redirects to root path' do
+          get :show, params: { id: order.id }
+          expect(response).to redirect_to(root_path)
+          expect(flash[:alert]).to eq('Access denied')
+        end
       end
     end
   end

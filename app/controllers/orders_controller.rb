@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :ensure_correct_visitor, only: :show
   def show
     @order = Order.find(params[:id])
   end
@@ -69,5 +70,12 @@ class OrdersController < ApplicationController
 
   def order_params
     params.permit(menu_item_ids: [], quantities: {})
+  end
+
+  def ensure_correct_visitor
+    @order = Order.find(params[:id])
+    return if current_user == @order.visitor || current_user == @order.restaurant.owner
+
+    redirect_to root_path, alert: 'Access denied'
   end
 end
