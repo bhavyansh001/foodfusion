@@ -1,9 +1,9 @@
 <div class="mt-6">
   <h3 class="text-xl font-medium mb-4"><%= t('order.update_status') %></h3>
-  <div class="space-x-2">
+  <div class="flex flex-wrap gap-2">
     <% if current_user.owner? %>
-      <% Order.statuses.keys.each do |status| %>
-        <%= button_to status.capitalize, 
+      <% ['cancelled', 'confirmed', 'in_progress', 'completed'].each do |status| %>
+        <%= button_to status.capitalize,
                       update_status_order_path(@order, status: status),
                       method: :patch,
                       class: "btn" %>

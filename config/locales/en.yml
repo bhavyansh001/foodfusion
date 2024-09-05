@@ -21,18 +21,27 @@ en:
       completed: "Your order is ready! It's on its way."
       cancelled: "We're sorry, but your order has been cancelled. If you didn't request this, please contact us."
       thank_you: "Thank you for your business!"
-      footer: "&copy; %{year} %{restaurant_name}. All rights reserved."
+      footer: "© %{year} %{restaurant_name}. All rights reserved."
       contact_us: "If you have any questions, please don't hesitate to contact us."
 
   order:
     details: "Order Details"
     restaurant: "Restaurant:"
     total_price: "Total Price:"
-    ordered_items: "Ordered Items:"
-    quantity: "Quantity:"
-    price: "Price:"
-    subtotal: "Subtotal:"
-    status: "Status:"
+    visitor_email: "आगंतुक ईमेल"
+    ordered_items: "ऑर्डर किए गए आइटम:"
+    quantity: "Quantity"
+    price: "Price"
+    subtotal: "Subtotal"
+    status: "Status"
     update_status: "Update Order Status"
     cancel_order: "Cancel Order"
     confirm_cancel: "Are you sure you want to cancel this order?"
+
+  number:
+    currency:
+      format:
+        unit: "$"
+        format: "%u%n"
+        delimiter: ","
+        separator: "."

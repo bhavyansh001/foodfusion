@@ -8,13 +8,15 @@
       <div class="space-y-4">
         <% @active_orders.each do |order| %>
           <div class="border-b border-gray-200 pb-4">
-            <div class="flex justify-between items-center mb-2">
-              <h3 class="text-lg font-medium text-gray-800">Order #<%= order.id %></h3>
-              <span class="px-2 py-1 rounded-full text-sm <%= order_status_color(order.status) %>">
-                <%= order.status.capitalize %>
-              </span>
-            </div>
+            <%= link_to order_path(order), class: 'block p-4 bg-white rounded-lg transition duration-300 ease-in-out transform hover:bg-gray-100 hover:shadow-lg hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2' do %>
+              <div class="flex justify-between items-center mb-2">
+                <h3 class="text-lg font-medium text-gray-800">Order #<%= order.id %></h3>
+                <span class="px-2 py-1 rounded-full text-sm <%= order_status_color(order.status) %>">
+                  <%= order.status.capitalize %>
+                </span>
+              </div>
               <p class="text-gray-800 font-semibold">Total: <%= number_to_currency(order.total_price) %></p>
+            <% end %>
           </div>
         <% end %>
       </div>
