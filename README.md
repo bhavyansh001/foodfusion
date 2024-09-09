@@ -1,6 +1,6 @@
 # FoodFusion
 
-Welcome to **FoodFusion** v1.0.0! This is the initial release of our innovative food ordering platform that connects customers with a variety of restaurants. With FoodFusion, users can easily browse menus, place orders, and track their orders in real-time, all from a single platform.
+Welcome to **FoodFusion**, a full-stack Ruby on Rails app. With FoodFusion, users can easily browse menus, place orders, and track their orders in real-time, all from a single platform.
 
 ## Table of Contents
 
@@ -12,7 +12,8 @@ Welcome to **FoodFusion** v1.0.0! This is the initial release of our innovative 
 6. [API Rate Limiting and Throttling](#api-rate-limiting-and-throttling)
 7. [Screenshots](#screenshots)
 8. [Mobile experience](#mobile-experience)
-8. [Contributing](#contributing)
+9. [Walkthrough: Building FoodFusion](#walkthrough-building-foodfusion)
+10. [Contributing](#contributing)
 
 ## Key Features
 
@@ -153,6 +154,9 @@ rails dev:cache
 Our Android app, built with Turbo Native, offers a native app-like experience, allowing you to browse menus, place orders, and track your order status with ease. Download the app now and enjoy the full FoodFusion experience on your mobile device:
 
 [Download foodfusion APK](https://github.com/bhavyansh001/foodfusion/raw/main/android-app/foodfusion.apk)
+
+## Walkthrough: Building FoodFusion
+For a detailed account of how I built the FoodFusion app, including technical decisions, milestones, and the overall thought process, check out my blog post: [Building the FoodFusion Rails App — Ruby Deep Dive [24]](https://medium.com/@diversepixel/building-the-foodfusion-rails-app-ruby-deep-dive-24-9cb0703c20d6).
 
 ## Contributing
 
