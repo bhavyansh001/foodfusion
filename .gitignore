@@ -41,4 +41,4 @@
 /coverage
 
 # Ignore config/deploy/production.rb
-/config/deploy/production.rb
+/config/production.sql
