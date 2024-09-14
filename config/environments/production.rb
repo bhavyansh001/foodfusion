@@ -107,7 +107,7 @@ Rails.application.configure do
     port: 587,
     domain: 'foodfusion.diversepixel.com',
     user_name: 'hi@foodfusion.diversepixel.com',
-    password: Rails.application.credentials.dig(:email_setup, :password),
+    password: ENV["SMTP_PASSWORD"],
     authentication: 'plain',
     enable_starttls_auto: true,
     open_timeout: 5,

@@ -3,10 +3,10 @@ image: bhavyansh001/foodfusion
 servers:
   web:
     hosts:
-      - 139.59.31.139
+      - 159.65.234.244
   job:
     hosts:
-      - 139.59.31.139
+      - 159.65.234.244
     cmd: bundle exec rake solid_queue:start
 registry:
   username: bhavyansh001
@@ -14,9 +14,14 @@ registry:
     - KAMAL_REGISTRY_PASSWORD
 env:
   clear:
-    DB_HOST: 139.59.31.139
+    DB_HOST: 159.65.234.244
   secret:
-    - RAILS_MASTER_KEY
+    - POSTGRES_USER
+    - POSTGRES_PASSWORD
+    - POSTGRES_DB
+    - REDIS_URL
+    - SECRET_KEY_BASE
+    - SMTP_PASSWORD
 builder:
   args:
     RUBY_VERSION: 3.3.0
@@ -25,7 +30,7 @@ builder:
 accessories:
   db:
     image: postgres:16.0
-    host: 139.59.31.139
+    host: 159.65.234.244
     port: 5432
     env:
       secret:
@@ -36,3 +41,10 @@ accessories:
       - config/production.sql:/docker-entrypoint-initdb.d/setup.sql
     directories:
       - data:/var/lib/postgresql/data
+  redis:
+    image: redis:7.0
+    host: 159.65.234.244
+    port: 6379
+    volumes:
+      - redis-data:/data
+    cmd: redis-server
