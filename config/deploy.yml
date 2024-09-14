@@ -1,0 +1,38 @@
+service: foodfusion
+image: bhavyansh001/foodfusion
+servers:
+  web:
+    hosts:
+      - 139.59.31.139
+  job:
+    hosts:
+      - 139.59.31.139
+    cmd: bundle exec rake solid_queue:start
+registry:
+  username: bhavyansh001
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+env:
+  clear:
+    DB_HOST: 139.59.31.139
+  secret:
+    - RAILS_MASTER_KEY
+builder:
+  args:
+    RUBY_VERSION: 3.3.0
+  remote:
+    arch: amd64
+accessories:
+  db:
+    image: postgres:16.0
+    host: 139.59.31.139
+    port: 5432
+    env:
+      secret:
+        - POSTGRES_USER
+        - POSTGRES_PASSWORD
+        - POSTGRES_DB
+    files:
+      - config/production.sql:/docker-entrypoint-initdb.d/setup.sql
+    directories:
+      - data:/var/lib/postgresql/data
